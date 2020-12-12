@@ -15,7 +15,7 @@
     var quantity = getParameterByName('Q');
     var rewardprogramId = getParameterByName('R');
 
-    if ( !checkoutId && !venderitemId && quantity ) {
+    if ( !checkoutId && !venderitemId && !quantity ) {
       alert("Error!");
       return;
     };
