@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <script type='text/javascript'>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    
+    var checkoutId = getParameterByName('CID');
+    var venderitemId = getParameterByName('VID');
+    var quantity = getParameterByName('Q');
+    var rewardprogramId = getParameterByName('R');
+
+    if ( !checkoutId && !venderitemId && quantity ) {
+      alert("Error!");
+      return;
+    };
+
+    if ( rewardprogramId ) {
+      var rewardprogram = "&src=1191000&spec=10999999&lptag=" + rewardprogramId;
+    } else {
+      var rewardprogram = "";
+    };
+
+    var AppCheckOutURL = "coupang://checkout?checkoutId=" + checkoutId + "&item[]=" + venderitemId + ":" + quantity + rewardprogram;
+    var WebCheckOutURL = "https://checkout.coupang.com/direct/checkout/" + checkoutId + "?item[]=" + venderitemId + ":" + quantity + rewardprogram;
+
+    console.log(AppCheckOutURL);
+    console.log(WebCheckOutURL);
+
+
+    window.location.assign(AppCheckOutURL);
+    setTimeout(function() {
+      window.location.assign(WebCheckOutURL)
+    }, 250);
+
+    </script>
+</head>
