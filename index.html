@@ -18,7 +18,12 @@
     var App = getParameterByName('AppURL');
     var fallback = getParameterByName('fallback');
     console.log(App);
-    console.log(Web);
+    console.log(fallback);
+    
+    if ( !App || !fallback ){
+      alert("Cannot get Link to Redirect");
+      return;
+    };
     
     window.location.assign(App);
     setTimeout(function() {
