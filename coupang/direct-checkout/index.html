@@ -17,26 +17,25 @@
 
     if ( !checkoutId && !venderitemId && !quantity ) {
       alert("Error!");
-      return;
-    };
-
-    if ( rewardprogramId ) {
-      var rewardprogram = "&src=1191000&spec=10999999&lptag=" + rewardprogramId;
     } else {
-      var rewardprogram = "";
+      if ( rewardprogramId ) {
+        var rewardprogram = "&src=1191000&spec=10999999&lptag=" + rewardprogramId;
+      } else {
+        var rewardprogram = "";
+      };
+
+      var AppCheckOutURL = "coupang://checkout?checkoutId=" + checkoutId + "&item[]=" + venderitemId + ":" + quantity + rewardprogram;
+      var WebCheckOutURL = "https://checkout.coupang.com/direct/checkout/" + checkoutId + "?item[]=" + venderitemId + ":" + quantity + rewardprogram;
+
+      console.log(AppCheckOutURL);
+      console.log(WebCheckOutURL);
+
+
+      window.location.assign(AppCheckOutURL);
+      setTimeout(function() {
+        window.location.assign(WebCheckOutURL)
+      }, 250);
     };
-
-    var AppCheckOutURL = "coupang://checkout?checkoutId=" + checkoutId + "&item[]=" + venderitemId + ":" + quantity + rewardprogram;
-    var WebCheckOutURL = "https://checkout.coupang.com/direct/checkout/" + checkoutId + "?item[]=" + venderitemId + ":" + quantity + rewardprogram;
-
-    console.log(AppCheckOutURL);
-    console.log(WebCheckOutURL);
-
-
-    window.location.assign(AppCheckOutURL);
-    setTimeout(function() {
-      window.location.assign(WebCheckOutURL)
-    }, 250);
 
     </script>
 </head>
