@@ -1,0 +1,30 @@
+<head>
+<title>Redirecting</title>
+</head>
+
+<body>
+<script type="text/javascript">
+  window.onload = function () {
+    
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    
+    var App = getParameterByName('AppURL');
+    var fallback = getParameterByName('fallback');
+    console.log(App);
+    console.log(Web);
+    
+    window.location.assign(App);
+    setTimeout(function() {
+      window.location.assign(fallback)
+    }, 250);
+
+  };
+</script>
+</body>
