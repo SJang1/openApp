@@ -18,50 +18,28 @@
         var quantity = getParameterByName('Q');  // Q=1
         var PreOrder = getParameterByName('P');  // P=true|false
         var rewardprogramId = getParameterByName('R');
-
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open(
-			"GET",
-			("https://mc.coupang.com/"),
-			true
-		);
-        xhr.send();
-        xhr.onreadystatechange = function() {
-          if(this.readyState == this.HEADERS_RECEIVED) {
-            var setcookie = xhr.getResponseHeader("Set-Cookie");
-            console.log(setcookie);
-            return setcookie;
-          }
-        }
-
-
     
-        // CORS 씨발ㄹㄹㄹㄹㄹㄹ
         $( document ).ready(function() {
           $.ajax({
-            type: 'POST',
-            url: "https://www.coupang.com/vp/direct-order/" + productId + "/items",
-            data: {
-              'items[]': venderitemId + ':+' + quantity,
-              'clickProductId': productId,
-              'landProductId': productId,
-              'preOrder': PreOrder
-            },
-            
-            success: function(data) {
-              consile.log(data);
+            url: 'https://mc.coupang.com/',
+            success: function () {
+              
+              $.ajax({
+                type: 'POST',
+                url: "https://m.coupang.com/vm/direct-order/" + productId + "/items",
+                data: {
+                  'items[]': venderitemId + ':+' + quantity,
+                  'clickProductId': productId,
+                  'landProductId': productId,
+                  'preOrder': PreOrder
+                },
+                success: function(data) {
+                  consile.log(data);
+                }
+              });
             }
           });
         });
-
-
-        
-        
-        
-
         </script>
-
     </head>
 </html>
